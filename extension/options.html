@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Argo CD JSONL Log Viewer</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        color: #1f2933;
+        margin: 0;
+        padding: 32px;
+        max-width: 640px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      header img {
+        width: 48px;
+        height: 48px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+      p {
+        line-height: 1.5;
+        color: #4a5561;
+      }
+      form {
+        display: flex;
+        gap: 8px;
+        margin: 18px 0 10px;
+      }
+      input[type='url'] {
+        flex: 1;
+        padding: 8px 10px;
+        border: 1px solid #c9d1d9;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      button {
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 6px;
+        background: #18be94;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #eef1f4;
+        color: #1f2933;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border: 1px solid #e3e8ee;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        font-family: Menlo, Consolas, monospace;
+        font-size: 13px;
+      }
+      #status {
+        min-height: 20px;
+        font-size: 13px;
+        color: #b35c00;
+      }
+      .empty {
+        color: #8a949e;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="icons/icon128.png" alt="" />
+      <h1>Argo CD JSONL Log Viewer</h1>
+    </header>
+    <p>
+      Add the URL of each Argo CD instance where the structured log view should be available. Chrome will ask you
+      to allow the extension on that site; nothing else is accessed.
+    </p>
+    <form id="add-form">
+      <input id="url" type="url" placeholder="https://argocd.example.com" required />
+      <button type="submit">Add</button>
+    </form>
+    <div id="status"></div>
+    <ul id="list"></ul>
+    <p>Open a pod's <b>Logs</b> tab in Argo CD and use the green <b>{ } JSON</b> button in the log toolbar to toggle the view.</p>
+    <script src="options.js"></script>
+  </body>
+</html>

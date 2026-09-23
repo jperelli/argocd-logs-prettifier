@@ -1,0 +1,23 @@
+Disclaimer
+
+This software is the exclusive property of Diagrid. Unauthorized use, reproduction, or distribution of this software,
+in whole or in part, is strictly prohibited. Access is restricted to authorized and licensed users only.
+By using this software, you agree to comply with Diagrid's Terms of Service at https://www.diagrid.io/terms-of-use.
+{"app_id":"marketing-accrual-service-dev","instance":"marketing-accrual-service-dev-75448bb8cc-jstl8","level":"warning","msg":"The default value for 'spec.metric.http.increasedCardinality' will change to 'false' in Dapr 1.15 or later","scope":"dapr.runtime.diagnostics","time":"2026-09-23T15:02:58.919612134Z","type":"log","ver":"1.18.1-d3e.2"}
+{"app_id":"marketing-accrual-service-dev","instance":"marketing-accrual-service-dev-75448bb8cc-jstl8","level":"warning","msg":"The default value for 'spec.metric.http.increasedCardinality' will change to 'false' in Dapr 1.15 or later","scope":"dapr.runtime.http","time":"2026-09-23T15:02:58.942426153Z","type":"log","ver":"1.18.1-d3e.2"}
+{"app_id":"marketing-accrual-service-dev","instance":"marketing-accrual-service-dev-75448bb8cc-jstl8","level":"warning","msg":"Graceful shutdown timeout is infinite, will wait indefinitely to shutdown","scope":"dapr.runtime.actor","time":"2026-09-23T15:02:58.942959205Z","type":"log","ver":"1.18.1-d3e.2"}
+time="2026-09-23T15:02:59Z" level=info msg="Connecting to broker" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="TCP connection established" local_addr="192.168.194.34:46090" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="Connection is ready" local_addr="192.168.194.34:46090" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="Connecting to broker" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="TCP connection established" local_addr="192.168.194.34:46094" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="Connection is ready" local_addr="192.168.194.34:46094" remote_addr="pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650"
+time="2026-09-23T15:02:59Z" level=info msg="Connected consumer" consumerID=1 name=yezwk subscription=dev-loyalty-rewards-accrual topic="persistent://marketing/dev-loyalty-rewards/bet-events-partition-0"
+time="2026-09-23T15:02:59Z" level=info msg="Created consumer" consumerID=1 name=yezwk subscription=dev-loyalty-rewards-accrual topic="persistent://marketing/dev-loyalty-rewards/bet-events-partition-0"
+time="2026-09-23T15:22:06Z" level=info msg="Changed number of partitions in topic" new_partitions=1 old_partitions=0 topic="persistent://marketing/dev-loyalty-rewards/oversight-events"
+time="2026-09-23T15:22:06Z" level=info msg="Connected producer" cnx="192.168.194.34:46094 -> 10.100.28.71:6650" epoch=0 topic="persistent://marketing/dev-loyalty-rewards/oversight-events-partition-0"
+time="2026-09-23T15:22:06Z" level=info msg="Created producer" cnx="192.168.194.34:46094 -> 10.100.28.71:6650" producerID=1 producer_name=pulsar-1-122743 topic="persistent://marketing/dev-loyalty-rewards/oversight-events-partition-0"
+time="2026-09-23T15:22:06Z" level=info msg="Changed number of partitions in topic" new_partitions=1 old_partitions=0 topic="persistent://marketing/dev-loyalty-rewards/player-events"
+time="2026-09-23T15:22:06Z" level=info msg="Connected producer" cnx="192.168.194.34:46094 -> 10.100.28.71:6650" epoch=0 topic="persistent://marketing/dev-loyalty-rewards/player-events-partition-0"
+time="2026-09-23T15:22:06Z" level=info msg="Created producer" cnx="192.168.194.34:46094 -> 10.100.28.71:6650" producerID=2 producer_name=pulsar-1-122744 topic="persistent://marketing/dev-loyalty-rewards/player-events-partition-0"
+
