@@ -2,3 +2,6 @@ dist/
 node_modules/
 *.zip
 .DS_Store
+.agents/
+.claude/
+skills-lock.json

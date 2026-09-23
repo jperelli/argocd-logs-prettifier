@@ -78,7 +78,7 @@ scripts/     packaging and icon rendering
 test/        parser tests
 ```
 
-Publishing steps and the store listing text are in [store/listing.md](store/listing.md). Changes are tracked in
+Store listing text, permission justifications and publishing steps are in [CHROMEWEBSTORE.md](CHROMEWEBSTORE.md). Changes are tracked in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## License
