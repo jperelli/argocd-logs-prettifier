@@ -54,4 +54,4 @@ anywhere; the extension only reads what Argo CD already displays.
 1. Bump `version` in `extension/manifest.json` and `package.json`, add a section to `CHANGELOG.md`.
 2. `npm test && npm run package` → `dist/argocd-logs-prettifier-<version>.zip`.
 3. Upload the zip in the developer dashboard, update the listing text if needed, submit for review.
-4. Tag the release: `git tag v<version> && git push --tags`.
+4. Tag and push: `git tag v<version> && git push origin v<version>` — the Release workflow builds the zip and attaches it to a GitHub release.
