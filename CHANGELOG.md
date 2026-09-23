@@ -20,4 +20,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Options page to register the Argo CD instances the extension may run on; permissions are requested per site.
 - Follows live logs: new lines keep the list pinned to the bottom when it already was.
 
-[1.0.0]: https://github.com/OWNER/argocd-jsonl-log-viewer/releases/tag/v1.0.0
+[1.0.0]: https://github.com/jperelli/argocd-jsonl-log-viewer/releases/tag/v1.0.0

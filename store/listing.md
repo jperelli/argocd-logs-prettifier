@@ -47,7 +47,7 @@ anywhere; the extension only reads what Argo CD already displays.
 
 **Remote code:** none. **Data usage:** no user data is collected or transmitted.
 
-**Privacy policy URL:** link to `PRIVACY.md` in the repository (raw or rendered).
+**Privacy policy URL:** https://github.com/jperelli/argocd-jsonl-log-viewer/blob/main/PRIVACY.md
 
 ## Release steps
 
