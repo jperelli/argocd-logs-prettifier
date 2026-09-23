@@ -178,5 +178,5 @@
 
   const api = { parseLine, parseLogfmt, normalizeLevel, formatTime, LEVELS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  root.ArgoJsonl = api;
+  root.ArgoLogsPrettifier = api;
 })(typeof window !== 'undefined' ? window : globalThis);

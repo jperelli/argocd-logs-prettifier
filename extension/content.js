@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const { parseLine, formatTime, LEVELS } = window.ArgoJsonl;
+  const { parseLine, formatTime, LEVELS } = window.ArgoLogsPrettifier;
   const STORAGE_KEY = 'ajlEnabled';
 
   const state = {

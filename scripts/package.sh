@@ -12,7 +12,7 @@ fi
 
 node test/parser.test.js
 mkdir -p dist
-out="dist/argocd-jsonl-log-viewer-$version.zip"
+out="dist/argocd-logs-prettifier-$version.zip"
 rm -f "$out"
 (cd extension && zip -qr "../$out" . -x '.*' '*~')
 echo "built $out"

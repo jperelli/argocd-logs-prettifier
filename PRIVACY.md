@@ -1,6 +1,6 @@
 # Privacy policy
 
-Argo CD JSONL Log Viewer runs entirely inside your browser.
+Argo CD Logs Prettifier runs entirely inside your browser.
 
 - It reads the log lines already displayed by the Argo CD web UI on the sites you explicitly add in its options
   page, and re-renders them on that same page.

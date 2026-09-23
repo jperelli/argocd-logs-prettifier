@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="Argo CD JSONL Log Viewer logo" width="96" height="96">
+  <img src="assets/logo.svg" alt="Argo CD Logs Prettifier logo" width="96" height="96">
 </p>
 
-<h1 align="center">Argo CD JSONL Log Viewer</h1>
+<h1 align="center">Argo CD Logs Prettifier</h1>
 
 <p align="center">Chrome extension that turns JSON / logfmt log lines in the Argo CD pod <b>Logs</b> tab into structured, filterable rows.</p>
 
@@ -64,7 +64,7 @@ Everything runs in the browser; nothing is sent anywhere. See [PRIVACY.md](PRIVA
 ```sh
 npm test          # parser tests against the real log samples in samples/
 npm run icons     # re-render extension/icons/*.png from assets/logo.svg (ImageMagick)
-npm run package   # build dist/argocd-jsonl-log-viewer-<version>.zip for the Chrome Web Store
+npm run package   # build dist/argocd-logs-prettifier-<version>.zip for the Chrome Web Store
 ```
 
 Layout:

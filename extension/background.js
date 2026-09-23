@@ -1,4 +1,4 @@
-const SCRIPT_ID = 'argocd-jsonl-logs';
+const SCRIPT_ID = 'argocd-logs-prettifier';
 const FILES = { js: ['parser.js', 'content.js'], css: ['styles.css'] };
 
 async function grantedOrigins() {
@@ -24,7 +24,7 @@ async function injectIntoOpenTabs(patterns) {
     if (!tab.id) continue;
     const target = { tabId: tab.id };
     const [{ result: already } = {}] = await chrome.scripting
-      .executeScript({ target, func: () => Boolean(window.ArgoJsonl) })
+      .executeScript({ target, func: () => Boolean(window.ArgoLogsPrettifier) })
       .catch(() => [{}]);
     if (already) continue;
     await chrome.scripting.insertCSS({ target, files: FILES.css }).catch(() => {});

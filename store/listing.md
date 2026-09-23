@@ -4,7 +4,7 @@ Copy these into the developer dashboard (https://chrome.google.com/webstore/devc
 
 ## Store listing
 
-**Name:** Argo CD JSONL Log Viewer
+**Name:** Argo CD Logs Prettifier
 
 **Summary (132 chars max):**
 Structured, filterable view of JSON and logfmt log lines in the Argo CD pod Logs tab: level badges, filters, expandable records.
@@ -47,11 +47,11 @@ anywhere; the extension only reads what Argo CD already displays.
 
 **Remote code:** none. **Data usage:** no user data is collected or transmitted.
 
-**Privacy policy URL:** https://github.com/jperelli/argocd-jsonl-log-viewer/blob/main/PRIVACY.md
+**Privacy policy URL:** https://github.com/jperelli/argocd-logs-prettifier/blob/main/PRIVACY.md
 
 ## Release steps
 
 1. Bump `version` in `extension/manifest.json` and `package.json`, add a section to `CHANGELOG.md`.
-2. `npm test && npm run package` → `dist/argocd-jsonl-log-viewer-<version>.zip`.
+2. `npm test && npm run package` → `dist/argocd-logs-prettifier-<version>.zip`.
 3. Upload the zip in the developer dashboard, update the listing text if needed, submit for review.
 4. Tag the release: `git tag v<version> && git push --tags`.
