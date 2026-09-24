@@ -131,6 +131,8 @@
       argoTs = tsMatch[1];
       s = s.slice(tsMatch[0].length);
     }
+    // Argo pads the timestamp column with 30 blanks when it equals the previous line's
+    const inheritTime = !tsMatch && /^\s{30,}/.test(text);
 
     const brace = s.indexOf('{');
     if (brace >= 0) {
@@ -138,7 +140,7 @@
       if (candidate.endsWith('}')) {
         try {
           const obj = JSON.parse(candidate);
-          if (isObject(obj)) return normalize(obj, 'json', original, argoTs);
+          if (isObject(obj)) return Object.assign(normalize(obj, 'json', original, argoTs), { inheritTime });
         } catch (e) {
           /* not json */
         }
@@ -146,7 +148,7 @@
     }
 
     const lf = parseLogfmt(s.trim());
-    if (lf) return normalize(lf, 'logfmt', original, argoTs);
+    if (lf) return Object.assign(normalize(lf, 'logfmt', original, argoTs), { inheritTime });
 
     return {
       format: 'raw',
@@ -159,6 +161,7 @@
       logger: null,
       traceId: null,
       extras: {},
+      inheritTime,
     };
   }
 
@@ -176,7 +179,16 @@
     return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${pad(d.getMilliseconds(), 3)}`;
   }
 
-  const api = { parseLine, parseLogfmt, normalizeLevel, formatTime, LEVELS };
+  function toMillis(value) {
+    if (value === undefined || value === null || value === '') return null;
+    if (typeof value === 'number') return value < 1e11 ? Math.round(value * 1000) : Math.round(value);
+    const s = String(value).trim();
+    if (/^\d{9,13}(\.\d+)?$/.test(s)) return toMillis(Number(s));
+    const ms = Date.parse(s);
+    return Number.isNaN(ms) ? null : ms;
+  }
+
+  const api = { parseLine, parseLogfmt, normalizeLevel, formatTime, toMillis, LEVELS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.ArgoLogsPrettifier = api;
 })(typeof window !== 'undefined' ? window : globalThis);

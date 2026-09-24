@@ -36,8 +36,10 @@ Argo's log toolbar toggles the view at any time.
 
 ## Features
 
-- Line number, time (`HH:MM:SS.mmm`, full value on hover), level badge, logger, message and up to six extra
-  fields per row.
+- Time (`HH:MM:SS.mmm`, full value on hover), level badge, logger, message and up to six extra fields per row.
+- Timeline of lines per time bucket, stacked by level. Drag to show only a time range, drag the selection to
+  slide it or its edges to resize it, double-click to clear. Times come from the record or from Argo CD's
+  timestamp column (clock button); lines Argo prints without a repeated timestamp inherit the previous one.
 - Click a row to expand the full record as syntax-coloured JSON, with **Copy JSON** / **Copy raw**.
 - Level chips (`TRACE` … `FATAL`, `OTHER`) show counts and filter rows; Ctrl/Alt-click a chip to show only that
   level, Ctrl/Alt-click it again to show all.

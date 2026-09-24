@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const { parseLine, formatTime, LEVELS } = window.ArgoLogsPrettifier;
+  const { parseLine, formatTime, toMillis, LEVELS, Timeline } = window.ArgoLogsPrettifier;
   const STORAGE_KEY = 'ajlEnabled';
   const ALL_LEVELS = [...LEVELS, 'none'];
   const RENDER_INTERVAL_MS = 250;
@@ -26,6 +26,9 @@
     byLine: new WeakMap(),
     textCounts: new Map(),
     lineCount: 0,
+    lastTs: null,
+    timeRange: null,
+    timeline: null,
     windowSize: WINDOW_STEP,
     mounted: 0,
     hidden: 0,
@@ -102,6 +105,9 @@
     state.byLine = new WeakMap();
     state.textCounts = new Map();
     state.lineCount = 0;
+    state.lastTs = null;
+    state.timeRange = null;
+    state.timeline = null;
     state.windowSize = WINDOW_STEP;
     state.mounted = 0;
     state.hidden = 0;
@@ -224,6 +230,12 @@
     }, { root: rows }).observe(more);
 
     panel.appendChild(toolbar);
+    state.timeline = new Timeline(panel, {
+      onRange: (range) => {
+        state.timeRange = range;
+        setFilterChanged();
+      },
+    });
     panel.appendChild(rows);
     viewer.appendChild(panel);
 
@@ -343,6 +355,13 @@
     }
 
     if (atBottom) container.scrollTop = container.scrollHeight;
+    state.timeline.update(timelineRecs(), state.lineCount);
+  }
+
+  function timelineRecs() {
+    const out = [];
+    for (const rec of state.recs.values()) if (rec.ts != null && isVisible(rec, true)) out.push(rec);
+    return out;
   }
 
   function keyFor(pod, text, n) {
@@ -356,7 +375,8 @@
     if (state.recs.has(key)) return false;
     state.textCounts.set(text, n + 1);
     const rec = createRec(key, line, text, pod);
-    setIndex(rec, state.lineCount);
+    inheritTs(rec, state.lastTs);
+    state.lastTs = rec.ts;
     state.lineCount++;
     if (rec.parsed.format !== 'raw') state.structured++;
     if (rec.visible) {
@@ -374,10 +394,14 @@
     return true;
   }
 
-  function setIndex(rec, i) {
-    if (rec.index === i) return;
-    rec.index = i;
-    rec.row.firstChild.textContent = String(i + 1);
+  // Argo prints a timestamp only when it differs from the previous line's second;
+  // the lines in between inherit it.
+  function inheritTs(rec, prevTs) {
+    if (rec.ts != null || prevTs == null || !rec.parsed.inheritTime) return;
+    rec.ts = prevTs;
+    rec.timeEl.textContent = formatTime(prevTs);
+    rec.timeEl.classList.add('ajl-time-inherited');
+    setVisible(rec, isVisible(rec));
   }
 
   function mount(rec, before) {
@@ -425,11 +449,14 @@
 
     const visible = [];
     let structured = 0;
+    let prevTs = null;
     for (let i = 0; i < order.length; i++) {
       const o = order[i];
       let rec = state.recs.get(o.key);
-      if (!rec) rec = createRec(o.key, o.line, o.text, o.pod);
-      else {
+      if (!rec) {
+        rec = createRec(o.key, o.line, o.text, o.pod);
+        inheritTs(rec, prevTs);
+      } else {
         rec.line = o.line;
         state.byLine.set(o.line, rec);
         if (refilter) {
@@ -438,9 +465,10 @@
         }
       }
       if (rec.parsed.format !== 'raw') structured++;
-      setIndex(rec, i);
+      if (rec.ts != null) prevTs = rec.ts;
       if (rec.visible) visible.push(rec);
     }
+    state.lastTs = prevTs;
 
     const start = Math.max(0, visible.length - state.windowSize);
     for (let i = 0; i < start; i++) unmount(visible[i]);
@@ -495,7 +523,7 @@
 
   function createRec(key, line, text, pod) {
     const parsed = parseLine(text);
-    const rec = { key, line, text, pod, parsed, level: parsed.level || 'none', row: document.createElement('div'), detail: null, visible: false, mounted: false, index: -1 };
+    const rec = { key, line, text, pod, parsed, level: parsed.level || 'none', row: document.createElement('div'), detail: null, visible: false, mounted: false, ts: toMillis(parsed.time), timeEl: null };
     rec.row._ajl = rec;
     rec.row.addEventListener('click', () => onRowClick(rec));
     state.recs.set(key, rec);
@@ -507,9 +535,11 @@
     return rec;
   }
 
-  function isVisible(rec) {
+  function isVisible(rec, ignoreTime) {
     if (!state.levels.has(rec.level)) return false;
-    return !state.search || matches(rec);
+    if (state.search && !matches(rec)) return false;
+    if (ignoreTime || !state.timeRange) return true;
+    return rec.ts != null && rec.ts >= state.timeRange[0] && rec.ts < state.timeRange[1];
   }
 
   function setVisible(rec, visible) {
@@ -553,14 +583,11 @@
     row.className = `ajl-row ajl-lvl-${lvl}${p.format === 'raw' ? ' ajl-raw' : ''}`;
     const frag = document.createDocumentFragment();
 
-    const n = document.createElement('span');
-    n.className = 'ajl-n';
-    frag.appendChild(n);
-
     const time = document.createElement('span');
     time.className = 'ajl-time';
     time.textContent = formatTime(p.time);
     if (p.time) time.title = p.time;
+    rec.timeEl = time;
     frag.appendChild(time);
 
     const level = document.createElement('span');
@@ -606,7 +633,6 @@
       frag.appendChild(extras);
     }
     row.replaceChildren(frag);
-    if (rec.index >= 0) n.textContent = String(rec.index + 1);
   }
 
   function renderDetail(p) {

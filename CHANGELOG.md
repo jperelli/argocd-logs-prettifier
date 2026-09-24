@@ -4,6 +4,22 @@ All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-09-24
+
+### Added
+
+- Timeline above the rows: a bar chart of lines per time bucket (stacked by level, bucket size chosen
+  automatically, up to ~120 buckets). Drag on it to show only the lines in that range; drag the middle of
+  the selection to slide it, its edges to resize it; double-click or **Clear selection** to reset. Hovering
+  a bar shows its range and counts.
+- Timestamps are read from the record (`time`, `ts`, `@timestamp`, epoch seconds/ms, …) or from Argo CD's
+  own timestamp column. Lines Argo prints with a blank timestamp column (same second as the previous line)
+  inherit it, shown dimmed. When most lines have no timestamp, a hint points to Argo CD's clock button.
+
+### Removed
+
+- The line-number column.
+
 ## [1.2.0] - 2026-09-24
 
 ### Changed
@@ -70,6 +86,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Options page to register the Argo CD instances the extension may run on; permissions are requested per site.
 - Follows live logs: new lines keep the list pinned to the bottom when it already was.
 
+[1.3.0]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.3.0
 [1.2.0]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.2.0
 [1.1.1]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.1.1
 [1.1.0]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.1.0

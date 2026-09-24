@@ -28,6 +28,7 @@ FEATURES
 • Every log line becomes a row showing its level, time, logger, message and extra fields.
 • Click a row to see the complete record, nicely formatted, and copy it.
 • Filter rows by level or by text, wrap long messages, expand or collapse all rows.
+• A timeline shows how many lines arrived per time bucket; drag on it to see only that period.
 • Lines that are not structured are shown exactly as they are.
 • Stays fast on busy logs: only the most recent lines are drawn, and scrolling up loads the earlier ones.
 • Argo CD's own controls keep working: container selection, follow, tail, since, filter and dark mode.
@@ -52,7 +53,7 @@ PERMISSIONS
 SUPPORT
 Found a bug or have a suggestion? Open an issue at https://github.com/jperelli/argocd-logs-prettifier/issues
 
-Version 1.2.0 — much faster on large, busy logs.
+Version 1.3.0 — timeline chart with drag-to-select time range.
 ```
 
 **Category**
@@ -72,13 +73,14 @@ English
 | Asset | Dimensions | Status | Filename |
 |-------|-----------|--------|----------|
 | Store Icon | 128×128 PNG | ✅ Ready | `extension/icons/icon128.png` |
-| Screenshot 1 | 1280×800 | ✅ Ready | `store/screenshot-1.png` |
+| Screenshot 1 | 1280×800 | 🟡 Needs update | `store/screenshot-1.png` |
 | Small Promo Tile | 440×280 | ⬜ Not created | |
 
 ### Screenshot Notes
 
 Screenshot 1: the Argo CD pod Logs tab with the formatted view on (level badges, filter chips, expanded row).
-Refresh it whenever the toolbar or row layout changes.
+Refresh it whenever the toolbar or row layout changes. 🟡 Needs update: taken before the timeline and without
+the removed number column.
 
 ## Permissions Justification
 
@@ -105,6 +107,7 @@ Refresh it whenever the toolbar or row layout changes.
 
 | Version | Date | Notes |
 |---------|------|-------|
+| 1.3.0 | 2026-09-24 | Timeline with drag-to-select range; line-number column removed. No permission changes. |
 | 1.2.0 | 2026-09-24 | Performance: only the most recent 1,000 rows are drawn; incremental updates. No permission changes. |
 | 1.1.1 | 2026-09-24 | Fix lost clicks while logs stream (rows updated in place). |
 | 1.1.0 | 2026-09-24 | Icon menu with Enable on this site / Settings / About; activeTab permission added (justified above). |

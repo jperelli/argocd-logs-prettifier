@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { parseLine, formatTime } = require('../extension/parser.js');
+const { parseLine, formatTime, toMillis } = require('../extension/parser.js');
 
 const samples = path.join(__dirname, '..', 'samples');
 const readLines = (f) => fs.readFileSync(path.join(samples, f), 'utf8').split('\n').filter(Boolean);
@@ -54,5 +54,12 @@ check(truncated.format === 'raw', 'truncated json falls back to raw');
 
 const nested = parseLine('{"severity":"WARNING","message":{"a":1},"labels":{"x":"y"},"n":null}');
 check(nested.level === 'warn' && nested.message === '{"a":1}' && nested.extras.n === null && !('labels' in nested.extras), 'object message stringified, objects excluded from extras');
+
+check(toMillis('2026-09-24T10:33:48.956799421Z') === Date.parse('2026-09-24T10:33:48.956Z'), 'toMillis parses RFC3339 with nanoseconds');
+check(toMillis(1700000000) === 1700000000000 && toMillis('1700000000000') === 1700000000000, 'toMillis handles epoch seconds and ms');
+const blank = parseLine(' '.repeat(31) + '{"level":"info","msg":"same second"}');
+check(blank.format === 'json' && blank.time === null && blank.inheritTime === true, 'blank Argo timestamp column marks the line as inheriting the previous time');
+check(argoTs.inheritTime === false && raw.inheritTime === false, 'lines with a timestamp or no padding do not inherit');
+check(toMillis(null) === null && toMillis('not a date') === null, 'toMillis returns null for missing or invalid input');
 
 console.log(`ok - ${checks} checks passed`);

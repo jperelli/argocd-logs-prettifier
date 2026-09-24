@@ -1,5 +1,5 @@
 const SCRIPT_ID = 'argocd-logs-prettifier';
-const FILES = { js: ['parser.js', 'content.js'], css: ['styles.css'] };
+const FILES = { js: ['parser.js', 'timeline.js', 'content.js'], css: ['styles.css'] };
 const SITE_PATTERN = /^https?:\/\/[^*]+\/\*$/;
 
 async function storedOrigins() {
