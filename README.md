@@ -18,7 +18,7 @@ Argo's log toolbar toggles the view at any time.
 
 ## Install
 
-**Chrome Web Store:** coming soon.
+**Chrome Web Store:** [Argo CD Logs Prettifier](https://chromewebstore.google.com/detail/argo-cd-logs-prettifier/nlccbcoeofgifpifelblbkgohacabpkg)
 
 **From source (unpacked):**
 

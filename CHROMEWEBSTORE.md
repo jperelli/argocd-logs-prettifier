@@ -2,6 +2,7 @@
 
 > Last Updated: 2026-09-24
 
+Published at https://chromewebstore.google.com/detail/argo-cd-logs-prettifier/nlccbcoeofgifpifelblbkgohacabpkg
 Copy the fields below into the developer dashboard (https://chrome.google.com/webstore/devconsole).
 The store strips markdown, so the description is plain text.
 
