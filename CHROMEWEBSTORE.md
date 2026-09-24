@@ -1,6 +1,6 @@
 # Chrome Web Store Listing — Argo CD Logs Prettifier
 
-> Last Updated: 2026-09-23
+> Last Updated: 2026-09-24
 
 Copy the fields below into the developer dashboard (https://chrome.google.com/webstore/devconsole).
 The store strips markdown, so the description is plain text.
@@ -33,8 +33,8 @@ FEATURES
 • A button in Argo CD's log toolbar switches back to the original view at any time.
 
 HOW TO USE
-1. Click the extension icon and add the address of your Argo CD instance (for example
-   https://argocd.example.com). Chrome will ask you to allow the extension on that site.
+1. Open your Argo CD instance, click the extension icon and choose "Enable on this site". Chrome will ask you
+   to allow the extension on that site.
 2. Open any pod in Argo CD and go to its Logs tab. The formatted view appears automatically.
 3. Use the { } JSON button in the log toolbar to switch between the formatted view and the original lines.
 
@@ -44,13 +44,14 @@ and never sends them anywhere. It stores just two things: whether the formatted 
 Argo CD addresses you added.
 
 PERMISSIONS
-• "Read and change your data on <your Argo CD address>" — asked only for the sites you add, so the extension
-  can reformat the log lines on those pages. You can remove a site at any time from the extension's options.
+• "Read and change your data on <your Argo CD address>" — asked only for the sites you enable, so the extension
+  can reformat the log lines on those pages. You can disable a site at any time from the same menu or from the
+  extension's settings.
 
 SUPPORT
 Found a bug or have a suggestion? Open an issue at https://github.com/jperelli/argocd-logs-prettifier/issues
 
-Version 1.0.1 — clearer description; no functional changes.
+Version 1.1.0 — enable the extension on the current site from the icon menu, no address to copy.
 ```
 
 **Category**
@@ -83,8 +84,9 @@ Refresh it whenever the toolbar or row layout changes.
 | Permission | Justification |
 |------------|---------------|
 | `storage` | Remembers whether the formatted view is on and the list of Argo CD addresses the user added in the options page. |
+| `activeTab` | Lets the icon menu read the address of the current tab so "Enable on this site" can offer that site; used only while the menu is open. |
 | `scripting` | Runs the formatting script on the Argo CD sites the user added. The extension has no fixed site list because Argo CD is self-hosted, so the script is registered for each address the user adds. |
-| Optional host permission `https://*/*`, `http://*/*` | Argo CD is self-hosted, so its address is not known in advance. The extension never asks for all sites: it requests access for exactly one origin at a time, the one the user typed in the options page, and only when the user clicks Add. Access can be removed per site from the options page or from chrome://extensions. |
+| Optional host permission `https://*/*`, `http://*/*` | Argo CD is self-hosted, so its address is not known in advance. The extension never asks for all sites: it requests access for exactly one origin at a time, the site of the current tab when the user chooses "Enable on this site" in the icon menu, or the address typed in the settings page. Access can be removed per site from the options page or from chrome://extensions. |
 
 **Remote code:** No. All code is included in the package.
 
@@ -102,6 +104,7 @@ Refresh it whenever the toolbar or row layout changes.
 
 | Version | Date | Notes |
 |---------|------|-------|
+| 1.1.0 | 2026-09-24 | Icon menu with Enable on this site / Settings / About; activeTab permission added (justified above). |
 | 1.0.1 | 2026-09-23 | Resubmission with the rewritten description; manifest description aligned with the short description. |
 | 1.0.0 | 2026-09-23 | First submission. Rejected (Yellow Argon, "excessive keywords in the description"): the description listed logging libraries and formats the parser recognises (".NET (Microsoft.Extensions.Logging JSON), dapr, pino, Serilog compact, OpenTelemetry-style and logfmt"). Fix: rewrote the description in plain language from the user's point of view without naming libraries or formats; resubmitted as 1.0.1. |
 

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 13px;
+        color: #1f2933;
+        margin: 0;
+        width: 260px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-bottom: 1px solid #e3e8ee;
+        font-weight: 600;
+      }
+      header img {
+        width: 20px;
+        height: 20px;
+      }
+      #site {
+        padding: 8px 12px 0;
+        font-size: 11px;
+        color: #6b7785;
+        font-family: Menlo, Consolas, monospace;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      menu {
+        list-style: none;
+        margin: 0;
+        padding: 6px 0;
+      }
+      menu button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 8px 12px;
+        border: 0;
+        background: none;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+      }
+      menu button:hover:not(:disabled),
+      menu button:focus-visible {
+        background: #eef6f3;
+        outline: none;
+      }
+      menu button:disabled {
+        color: #9aa5b1;
+        cursor: default;
+      }
+      menu button .icon {
+        width: 16px;
+        text-align: center;
+        color: #18be94;
+      }
+      menu button:disabled .icon {
+        color: #c5ccd3;
+      }
+      menu button.danger .icon {
+        color: #d9363e;
+      }
+      #status {
+        padding: 0 12px 8px;
+        font-size: 12px;
+        color: #b35c00;
+        min-height: 0;
+      }
+      #status:empty {
+        display: none;
+      }
+      #about {
+        border-top: 1px solid #e3e8ee;
+        padding: 10px 12px;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #4a5561;
+      }
+      #about[hidden] {
+        display: none;
+      }
+      #about a {
+        color: #0b6bcb;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header><img src="icons/icon32.png" alt="" /><span>Argo CD Logs Prettifier</span></header>
+    <div id="site"></div>
+    <menu>
+      <li>
+        <button id="toggle-site" type="button" disabled><span class="icon">+</span><span id="toggle-label">Enable on this site</span></button>
+      </li>
+      <li><button id="settings" type="button"><span class="icon">&#9881;</span><span>Settings…</span></button></li>
+      <li><button id="about-btn" type="button"><span class="icon">i</span><span>About</span></button></li>
+    </menu>
+    <div id="status"></div>
+    <section id="about" hidden>
+      <div><b>Argo CD Logs Prettifier</b> <span id="version"></span></div>
+      <div>Formats JSON log lines in the Argo CD Logs tab into readable rows.</div>
+      <div>
+        <a id="repo" href="https://github.com/jperelli/argocd-logs-prettifier" target="_blank" rel="noopener">Source &amp; issues</a>
+        ·
+        <a href="https://github.com/jperelli/argocd-logs-prettifier/blob/main/PRIVACY.md" target="_blank" rel="noopener">Privacy</a>
+      </div>
+    </section>
+    <script src="popup.js"></script>
+  </body>
+</html>

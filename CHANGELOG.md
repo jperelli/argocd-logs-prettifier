@@ -4,6 +4,21 @@ All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-09-24
+
+### Added
+
+- Clicking the extension icon opens a menu with **Enable on this site** (adds the current tab's Argo CD
+  address and asks for permission right there, no copy-pasting), **Settings…** and **About**. The entry turns
+  into **Disable on this site** where the extension is already enabled.
+- Sites granted through Chrome's permission dialog are recorded by the background worker, so enabling works
+  even though Chrome closes the popup while the dialog is open; the site list is also reconciled with the
+  granted permissions on install and startup.
+
+### Fixed
+
+- Content script registration no longer races on install (duplicate script id error).
+
 ## [1.0.1] - 2026-09-23
 
 ### Changed
@@ -29,5 +44,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Options page to register the Argo CD instances the extension may run on; permissions are requested per site.
 - Follows live logs: new lines keep the list pinned to the bottom when it already was.
 
+[1.1.0]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.1.0
 [1.0.1]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.0.1
 [1.0.0]: https://github.com/jperelli/argocd-logs-prettifier/releases/tag/v1.0.0

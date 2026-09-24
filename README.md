@@ -28,8 +28,9 @@ Argo's log toolbar toggles the view at any time.
 
 ## Setup
 
-1. Click the extension icon (or open its options page) and add the URL of your Argo CD instance, for example
-   `https://argocd.example.com`. Chrome asks you to allow the extension on that site.
+1. Open your Argo CD instance, click the extension icon and choose **Enable on this site**. Chrome asks you to
+   allow the extension on that site. (**Settings…** in the same menu lists the enabled instances and lets you
+   add one by address or remove it.)
 2. Open any pod's **Logs** tab in Argo CD. Rows are parsed automatically; use the green `{ } JSON` button in the
    log toolbar to switch between the structured view and Argo's raw lines. The choice is remembered.
 
