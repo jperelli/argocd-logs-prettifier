@@ -158,13 +158,8 @@
 }
 
 .ajl-timeline {
-  --ajl-dim: rgba(255, 255, 255, 0.65);
   border-bottom: 1px solid var(--ajl-border);
   padding: 4px 8px 2px;
-}
-
-.ajl-dark .ajl-timeline {
-  --ajl-dim: rgba(28, 34, 41, 0.65);
 }
 
 .ajl-timeline canvas {

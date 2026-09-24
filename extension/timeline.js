@@ -58,7 +58,12 @@
       container.appendChild(this.el);
       this.ctx = this.canvas.getContext('2d');
 
-      new ResizeObserver(() => this.draw()).observe(this.el);
+      this.w = 0;
+      // width comes from the observer so draw() never forces a synchronous layout
+      new ResizeObserver((entries) => {
+        this.w = entries[0].contentRect.width;
+        this.draw();
+      }).observe(this.el);
       const c = this.canvas;
       c.addEventListener('pointerdown', (e) => this.onDown(e));
       c.addEventListener('pointermove', (e) => this.onMove(e));
@@ -121,7 +126,7 @@
       return h.start + (x / this.width()) * (h.end - h.start);
     }
     width() {
-      return this.el.clientWidth || 1;
+      return this.w || 1;
     }
     snapDown(t) {
       const h = this.hist;
@@ -248,10 +253,10 @@
       const ctx = this.ctx;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, HEIGHT);
-      const styles = getComputedStyle(this.el);
       const h = this.hist;
+      const dark = this.el.closest('.ajl-dark') !== null;
       if (!h) {
-        ctx.fillStyle = styles.getPropertyValue('--ajl-muted').trim() || '#6b7785';
+        ctx.fillStyle = dark ? '#9aa5b1' : '#6b7785';
         ctx.font = '12px sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -279,7 +284,7 @@
       if (sel) {
         const x0 = this.xOf(sel[0]);
         const x1 = this.xOf(sel[1]);
-        ctx.fillStyle = styles.getPropertyValue('--ajl-dim').trim() || 'rgba(255,255,255,0.65)';
+        ctx.fillStyle = dark ? 'rgba(28, 34, 41, 0.65)' : 'rgba(255, 255, 255, 0.65)';
         ctx.fillRect(0, 0, x0, HEIGHT);
         ctx.fillRect(x1, 0, w - x1, HEIGHT);
         ctx.fillStyle = '#18be94';
