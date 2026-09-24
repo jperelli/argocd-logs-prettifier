@@ -1,6 +1,6 @@
 {
   "name": "argocd-logs-prettifier",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Chrome extension that renders JSON / logfmt log lines in the Argo CD pod Logs tab as structured, filterable rows.",
   "private": true,
   "license": "MIT",

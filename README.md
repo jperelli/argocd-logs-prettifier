@@ -44,6 +44,8 @@ Argo's log toolbar toggles the view at any time.
 - Text filter on message, logger, pod name or raw line (in addition to Argo's server-side filter).
 - **Wrap** long messages, **Expand all** / collapse all.
 - Follows live logs: when the list is scrolled to the bottom, new lines keep it there.
+- Stays fast on busy logs: only the most recent 1,000 rows are in the page, and scrolling up (or the button at
+  the top of the list) loads 1,000 more. Filters and counts still apply to every line.
 - Dark-mode styling when Argo CD's dark mode is on.
 
 ## Recognised formats
@@ -66,6 +68,10 @@ Everything runs in the browser; nothing is sent anywhere. See [PRIVACY.md](PRIVA
 npm test          # parser tests against the real log samples in samples/
 npm run icons     # re-render extension/icons/*.png from assets/logo.svg (ImageMagick)
 npm run package   # build dist/argocd-logs-prettifier-<version>.zip for the Chrome Web Store
+
+# measure the cost on a live Argo CD tab (long tasks on the main thread):
+google-chrome --remote-debugging-port=9222 --user-data-dir=/tmp/argocd-perf "<argo cd logs url>"
+node scripts/perf.js 30 "label"   # toggle the view off and repeat for Argo CD's own baseline
 ```
 
 Layout:

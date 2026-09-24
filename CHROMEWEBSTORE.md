@@ -29,6 +29,7 @@ FEATURES
 • Click a row to see the complete record, nicely formatted, and copy it.
 • Filter rows by level or by text, wrap long messages, expand or collapse all rows.
 • Lines that are not structured are shown exactly as they are.
+• Stays fast on busy logs: only the most recent lines are drawn, and scrolling up loads the earlier ones.
 • Argo CD's own controls keep working: container selection, follow, tail, since, filter and dark mode.
 • A button in Argo CD's log toolbar switches back to the original view at any time.
 
@@ -51,7 +52,7 @@ PERMISSIONS
 SUPPORT
 Found a bug or have a suggestion? Open an issue at https://github.com/jperelli/argocd-logs-prettifier/issues
 
-Version 1.1.1 — clicks on rows no longer get lost while logs are streaming.
+Version 1.2.0 — much faster on large, busy logs.
 ```
 
 **Category**
@@ -104,6 +105,7 @@ Refresh it whenever the toolbar or row layout changes.
 
 | Version | Date | Notes |
 |---------|------|-------|
+| 1.2.0 | 2026-09-24 | Performance: only the most recent 1,000 rows are drawn; incremental updates. No permission changes. |
 | 1.1.1 | 2026-09-24 | Fix lost clicks while logs stream (rows updated in place). |
 | 1.1.0 | 2026-09-24 | Icon menu with Enable on this site / Settings / About; activeTab permission added (justified above). |
 | 1.0.1 | 2026-09-23 | Resubmission with the rewritten description; manifest description aligned with the short description. |
