@@ -51,7 +51,7 @@ PERMISSIONS
 SUPPORT
 Found a bug or have a suggestion? Open an issue at https://github.com/jperelli/argocd-logs-prettifier/issues
 
-Version 1.1.0 — enable the extension on the current site from the icon menu, no address to copy.
+Version 1.1.1 — clicks on rows no longer get lost while logs are streaming.
 ```
 
 **Category**
@@ -104,6 +104,7 @@ Refresh it whenever the toolbar or row layout changes.
 
 | Version | Date | Notes |
 |---------|------|-------|
+| 1.1.1 | 2026-09-24 | Fix lost clicks while logs stream (rows updated in place). |
 | 1.1.0 | 2026-09-24 | Icon menu with Enable on this site / Settings / About; activeTab permission added (justified above). |
 | 1.0.1 | 2026-09-23 | Resubmission with the rewritten description; manifest description aligned with the short description. |
 | 1.0.0 | 2026-09-23 | First submission. Rejected (Yellow Argon, "excessive keywords in the description"): the description listed logging libraries and formats the parser recognises (".NET (Microsoft.Extensions.Logging JSON), dapr, pino, Serilog compact, OpenTelemetry-style and logfmt"). Fix: rewrote the description in plain language from the user's point of view without naming libraries or formats; resubmitted as 1.0.1. |
